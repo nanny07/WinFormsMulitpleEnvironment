@@ -11,6 +11,8 @@ The tricks are the follows:
 	- xyz is the name of one environment
 - Modify the .csproj to include/exclude the json configuration files as needed
 	- Look at the `<Choice>` section
+- Register the Configuration on the ApplicationBuilder with `appsettings.json` always as first json file
+	- Usually the `appsettings.json` contains variable that are commons between environments and common variables are not written on every json files
 - The `*.pubxml` files are needed for the different settings on ClickOnce
 	- A different ProductName property must be used for every environments
 	- A different certificate must be used for every environments
