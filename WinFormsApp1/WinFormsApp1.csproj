@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Configurations>Debug;Release;Test;Prod</Configurations>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="appsettings.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+        <Content Include="appsettings.test.json">
+            <DependentUpon>appsettings.json</DependentUpon>
+        </Content>
+        <Content Include="appsettings.prod.json">
+            <DependentUpon>appsettings.json</DependentUpon>
+        </Content>
+    </ItemGroup>
+
+    <Choose>
+        <When Condition=" '$(Configuration)' == 'Test' ">
+            <ItemGroup>
+                <Content Include="appsettings.test.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+                <Content Remove="appsettings.prod.json" />
+            </ItemGroup>
+        </When>
+        <When Condition=" '$(Configuration)'=='Prod' ">
+            <ItemGroup>
+                <Content Include="appsettings.prod.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+                <Content Remove="appsettings.test.json" />
+            </ItemGroup>
+        </When>
+    </Choose>
+</Project>
